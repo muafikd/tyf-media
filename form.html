@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Анкета кандидата — TYF Media</title>
+  <link rel="icon" type="image/jpeg" href="icon.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #000000;
+      --card-bg: rgba(22, 22, 26, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --yellow: #eae667;
+      --yellow-bright: #f4f07a;
+      --yellow-glow: rgba(234, 230, 103, 0.15);
+      --text: #f4f4f5;
+      --text-muted: #8b8b93;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 16px 40px;
+      position: relative;
+    }
+
+    .bg-glow-top {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 500px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(234, 230, 103, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 18px;
+      transition: color 0.2s;
+      padding: 4px 0;
+    }
+
+    .back-btn:hover {
+      color: var(--yellow);
+    }
+
+    .back-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.2;
+    }
+
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(234, 230, 103, 0.08);
+      border: 1px solid rgba(234, 230, 103, 0.3);
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 99px;
+      margin-bottom: 10px;
+    }
+
+    .page-title {
+      font-size: clamp(24px, 6vw, 30px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    .page-title span {
+      color: var(--yellow);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #e4e4e7;
+    }
+
+    /* font-size: 16px блокирует принудительный зум в Safari на iOS */
+    input, textarea {
+      width: 100%;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      color: #fff;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--yellow);
+      box-shadow: 0 0 0 3px rgba(234, 230, 103, 0.15);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #52525b;
+      font-size: 14px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+      line-height: 1.4;
+    }
+
+    .task-card {
+      background: var(--card-bg);
+      border: 1px dashed rgba(234, 230, 103, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 4px;
+    }
+
+    .task-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .task-text {
+      font-size: 13px;
+      line-height: 1.45;
+      color: #d1d1d6;
+      margin-bottom: 10px;
+    }
+
+    .task-link-box {
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 8px;
+      word-break: break-all;
+    }
+
+    .task-link-box a {
+      color: var(--yellow);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+
+    .btn-submit {
+      background-color: var(--yellow);
+      color: #000000;
+      font-size: 16px;
+      font-weight: 800;
+      border: none;
+      border-radius: 12px;
+      padding: 15px;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      margin-top: 4px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 20px var(--yellow-glow);
+    }
+
+    .btn-submit:hover {
+      background-color: var(--yellow-bright);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.98);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .success-box {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid rgba(234, 230, 103, 0.4);
+      border-radius: 16px;
+      padding: 24px 16px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .success-box h3 {
+      font-size: 20px;
+      color: var(--yellow);
+      margin-bottom: 6px;
+    }
+
+    .success-box p {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow-top"></div>
+
+  <main class="container">
+    <a href="roles.html" class="back-btn">
+      <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+      Назад к выбору должности
+    </a>
+
+    <div>
+      <div class="role-badge" id="role-badge">Загрузка...</div>
+    </div>
+
+    <h1 class="page-title">Заполните <span>анкету</span></h1>
+
+    <form id="staffForm">
+      <input type="hidden" name="role" id="hidden-role">
+
+      <div class="form-group">
+        <label>Имя и фамилия</label>
+        <input type="text" name="fullName" placeholder="Например: Арман Сериков" required>
+      </div>
+
+      <div class="form-group">
+        <label>Группа</label>
+        <input type="text" name="group" placeholder="Например: SE-2304" required>
+      </div>
+
+      <div class="form-group">
+        <label>Telegram юзернейм</label>
+        <input type="text" name="telegram" placeholder="@username" required>
+      </div>
+
+      <div class="form-group">
+        <label>Опыт (пожалуйста, подробнее)</label>
+        <textarea name="experience" placeholder="Опишите ваши навыки, проекты, технику..." required></textarea>
+      </div>
+
+      <div class="task-card">
+        <div class="task-title">
+          <span>⚡</span> Тестовое задание:
+        </div>
+        <p class="task-text" id="task-text">Задание уточняется...</p>
+        <div class="task-link-box">
+          Задание отправьте сюда: 
+          <a href="#" id="task-link" target="_blank">[Ссылка на группу появится здесь]</a>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submit-btn">Отправить анкету</button>
+    </form>
+
+    <div class="success-box" id="success-box">
+      <h3>Заявка успешно отправлена! 🎉</h3>
+      <p>Спасибо за отклик. Обязательно загрузите выполненное задание по ссылке в блоке выше.</p>
+    </div>
+  </main>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxSHkwTNu0m_PYrpDUP2_00TnmGYbEXzqy-pGucXobkntGmDgoSDGiPFEE3FGn4kpOP/exec";
+
+    const rolesData = {
+      operator: {
+        title: "Оператор",
+        task: "Тестовое задание для Оператора (Саша добавит текст).",
+        groupLink: "https://t.me/"
+      },
+      editor: {
+        title: "Монтажер",
+        task: "Тестовое задание для Монтажера (Саша добавит текст).",
+        groupLink: "https://t.me/"
+      },
+      designer: {
+        title: "Дизайнер",
+        task: "Тестовое задание для Дизайнера (Саша добавит текст).",
+        groupLink: "https://t.me/"
+      },
+      host: {
+        title: "Ведущий",
+        task: "Тестовое задание для Ведущего (Саша добавит текст).",
+        groupLink: "https://t.me/"
+      },
+      event: {
+        title: "Ивент",
+        task: "Тестовое задание для Ивент-отдела (Саша добавит текст).",
+        groupLink: "https://t.me/"
+      },
+      photographer: {
+        title: "Фотограф",
+        task: "Тестовое задание для Фотографа (Саша добавит текст).",
+        groupLink: "https://t.me/"
+      }
+    };
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const roleKey = urlParams.get('role') || 'operator';
+    const currentRole = rolesData[roleKey] || rolesData['operator'];
+
+    document.getElementById('role-badge').textContent = `Направление: ${currentRole.title}`;
+    document.getElementById('hidden-role').value = currentRole.title;
+    document.getElementById('task-text').textContent = currentRole.task;
+    
+    const taskLinkElem = document.getElementById('task-link');
+    taskLinkElem.href = currentRole.groupLink;
+    taskLinkElem.textContent = currentRole.groupLink !== '#' ? currentRole.groupLink : '[Ссылка на группу]';
+
+    const form = document.getElementById('staffForm');
+    const submitBtn = document.getElementById('submit-btn');
+    const successBox = document.getElementById('success-box');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Отправка...';
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        form.style.display = 'none';
+        successBox.style.display = 'block';
+      } catch (err) {
+        alert('Ошибка при отправке: ' + err.message);
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Отправить анкету';
+      }
+    });
+  </script>
+</body>
+</html>
