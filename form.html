@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Анкета кандидата — TYF Media</title>
   <link rel="icon" type="image/jpeg" href="icon.jpg">
-
+  <link rel="apple-touch-icon" href="logo.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -129,7 +129,6 @@
       color: #e4e4e7;
     }
 
-    /* font-size: 16px блокирует принудительный зум в Safari на iOS */
     input, textarea {
       width: 100%;
       background: var(--card-bg);
@@ -158,45 +157,18 @@
       line-height: 1.4;
     }
 
-    .task-card {
-      background: var(--card-bg);
+    .portfolio-notice {
+      background: rgba(234, 230, 103, 0.06);
       border: 1px dashed rgba(234, 230, 103, 0.35);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 14px;
-      padding: 16px;
-      margin-top: 4px;
-    }
-
-    .task-title {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--yellow);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .task-text {
-      font-size: 13px;
-      line-height: 1.45;
-      color: #d1d1d6;
-      margin-bottom: 10px;
-    }
-
-    .task-link-box {
+      border-radius: 10px;
+      padding: 10px 12px;
       font-size: 12px;
-      color: var(--text-muted);
-      border-top: 1px solid rgba(255, 255, 255, 0.06);
-      padding-top: 8px;
-      word-break: break-all;
+      line-height: 1.45;
+      color: #d4d4d8;
     }
 
-    .task-link-box a {
+    .portfolio-notice strong {
       color: var(--yellow);
-      font-weight: 600;
-      text-decoration: underline;
     }
 
     .btn-submit {
@@ -209,7 +181,7 @@
       padding: 15px;
       cursor: pointer;
       letter-spacing: 0.3px;
-      margin-top: 4px;
+      margin-top: 6px;
       transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       box-shadow: 0 8px 20px var(--yellow-glow);
     }
@@ -232,22 +204,56 @@
       display: none;
       background: var(--card-bg);
       border: 1px solid rgba(234, 230, 103, 0.4);
-      border-radius: 16px;
-      padding: 24px 16px;
+      border-radius: 18px;
+      padding: 32px 20px;
       text-align: center;
       margin-top: 10px;
     }
 
     .success-box h3 {
-      font-size: 20px;
+      font-size: 22px;
+      font-weight: 800;
       color: var(--yellow);
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
     .success-box p {
-      color: var(--text-muted);
-      font-size: 13px;
-      line-height: 1.5;
+      color: #d1d1d6;
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 24px;
+    }
+
+    .btn-telegram-chat {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      background: #24a1de;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 15px 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(36, 161, 222, 0.25);
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .btn-telegram-chat svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    .btn-telegram-chat:hover {
+      background: #2095cf;
+      transform: translateY(-2px);
+    }
+
+    .btn-telegram-chat:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
@@ -256,7 +262,7 @@
   <div class="bg-glow-top"></div>
 
   <main class="container">
-    <a href="roles.html" class="back-btn">
+    <a href="roles.html" class="back-btn" id="back-btn-link">
       <svg viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
       Назад к выбору должности
     </a>
@@ -290,14 +296,11 @@
         <textarea name="experience" placeholder="Опишите ваши навыки, проекты, технику..." required></textarea>
       </div>
 
-      <div class="task-card">
-        <div class="task-title">
-          <span>⚡</span> Тестовое задание:
-        </div>
-        <p class="task-text" id="task-text">Задание уточняется...</p>
-        <div class="task-link-box">
-          Задание отправьте сюда: 
-          <a href="#" id="task-link" target="_blank">[Ссылка на группу появится здесь]</a>
+      <div class="form-group">
+        <label>Ссылка на портфолио / работы</label>
+        <input type="url" name="portfolio" placeholder="https://drive.google.com/..." required>
+        <div class="portfolio-notice">
+          📌 <strong>Важно:</strong> соберите все ваши работы в <strong>одну общую папку</strong> (Google Drive, Яндекс Диск и т.д.) и отправьте <strong>одну ссылку</strong> с открытым доступом. Не прикрепляйте ссылки по отдельности.
         </div>
       </div>
 
@@ -305,62 +308,38 @@
     </form>
 
     <div class="success-box" id="success-box">
-      <h3>Заявка успешно отправлена! 🎉</h3>
-      <p>Спасибо за отклик. Обязательно загрузите выполненное задание по ссылке в блоке выше.</p>
+      <h3>Анкета принята! 🎉</h3>
+      <p>Остался последний обязательный шаг — вступить в общий чат отбора, чтобы не пропустить результаты и созвоны.</p>
+      <a href="https://t.me/+sct7DA79s2MxN2Ey" target="_blank" rel="noopener noreferrer" class="btn-telegram-chat">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+        Войти в чат отбора
+      </a>
     </div>
   </main>
 
   <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxSHkwTNu0m_PYrpDUP2_00TnmGYbEXzqy-pGucXobkntGmDgoSDGiPFEE3FGn4kpOP/exec";
 
-    const rolesData = {
-      operator: {
-        title: "Оператор",
-        task: "Тестовое задание для Оператора (Саша добавит текст).",
-        groupLink: "https://t.me/"
-      },
-      editor: {
-        title: "Монтажер",
-        task: "Тестовое задание для Монтажера (Саша добавит текст).",
-        groupLink: "https://t.me/"
-      },
-      designer: {
-        title: "Дизайнер",
-        task: "Тестовое задание для Дизайнера (Саша добавит текст).",
-        groupLink: "https://t.me/"
-      },
-      host: {
-        title: "Ведущий",
-        task: "Тестовое задание для Ведущего (Саша добавит текст).",
-        groupLink: "https://t.me/"
-      },
-      event: {
-        title: "Ивент",
-        task: "Тестовое задание для Ивент-отдела (Саша добавит текст).",
-        groupLink: "https://t.me/"
-      },
-      photographer: {
-        title: "Фотограф",
-        task: "Тестовое задание для Фотографа (Саша добавит текст).",
-        groupLink: "https://t.me/"
-      }
+    const rolesTitles = {
+      operator: "Оператор",
+      editor: "Монтажер",
+      designer: "Дизайнер",
+      host: "Ведущий",
+      event: "Ивент",
+      photographer: "Фотограф"
     };
 
     const urlParams = new URLSearchParams(window.location.search);
     const roleKey = urlParams.get('role') || 'operator';
-    const currentRole = rolesData[roleKey] || rolesData['operator'];
+    const roleTitle = rolesTitles[roleKey] || "Оператор";
 
-    document.getElementById('role-badge').textContent = `Направление: ${currentRole.title}`;
-    document.getElementById('hidden-role').value = currentRole.title;
-    document.getElementById('task-text').textContent = currentRole.task;
-    
-    const taskLinkElem = document.getElementById('task-link');
-    taskLinkElem.href = currentRole.groupLink;
-    taskLinkElem.textContent = currentRole.groupLink !== '#' ? currentRole.groupLink : '[Ссылка на группу]';
+    document.getElementById('role-badge').textContent = `Направление: ${roleTitle}`;
+    document.getElementById('hidden-role').value = roleTitle;
 
     const form = document.getElementById('staffForm');
     const submitBtn = document.getElementById('submit-btn');
     const successBox = document.getElementById('success-box');
+    const backBtnLink = document.getElementById('back-btn-link');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -379,7 +358,9 @@
         });
 
         form.style.display = 'none';
+        backBtnLink.style.display = 'none';
         successBox.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
         alert('Ошибка при отправке: ' + err.message);
         submitBtn.disabled = false;
