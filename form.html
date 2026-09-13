@@ -267,11 +267,11 @@
       Назад к выбору должности
     </a>
 
-    <div>
+    <div id="badge-wrapper">
       <div class="role-badge" id="role-badge">Загрузка...</div>
     </div>
 
-    <h1 class="page-title">Заполните <span>анкету</span></h1>
+    <h1 class="page-title" id="form-title">Заполните <span>анкету</span></h1>
 
     <form id="staffForm">
       <input type="hidden" name="role" id="hidden-role">
@@ -340,6 +340,8 @@
     const submitBtn = document.getElementById('submit-btn');
     const successBox = document.getElementById('success-box');
     const backBtnLink = document.getElementById('back-btn-link');
+    const formTitle = document.getElementById('form-title');
+    const badgeWrapper = document.getElementById('badge-wrapper');
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -359,6 +361,8 @@
 
         form.style.display = 'none';
         backBtnLink.style.display = 'none';
+        formTitle.style.display = 'none';
+        badgeWrapper.style.display = 'none';
         successBox.style.display = 'block';
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } catch (err) {
